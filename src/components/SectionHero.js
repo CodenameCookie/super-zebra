@@ -6,30 +6,30 @@ import ActionLink from './ActionLink';
 
 export default class SectionHero extends React.Component {
     render() {
-        let section = _.get(this.props, 'section');
+        let section = _.get(this.props, 'section', null);
         return (
-            <section id={_.get(section, 'section_id')} className="block hero-block bg-accent outer">
+            <section id={_.get(section, 'section_id', null)} className="block hero-block bg-accent outer">
               <div className="inner">
                 <div className="grid">
-                  {_.get(section, 'image') && 
+                  {_.get(section, 'image', null) && (
                   <div className="cell block-preview">
-                    <img src={safePrefix(_.get(section, 'image'))} alt={_.get(section, 'title')} />
+                    <img src={safePrefix(_.get(section, 'image', null))} alt={_.get(section, 'title', null)} />
                   </div>
-                  }
+                  )}
                   <div className="cell block-content">
-                    {_.get(section, 'title') && 
-                    <h2 className="block-title underline">{_.get(section, 'title')}</h2>
-                    }
+                    {_.get(section, 'title', null) && (
+                    <h2 className="block-title underline">{_.get(section, 'title', null)}</h2>
+                    )}
                     <div className="block-copy">
-                      {markdownify(_.get(section, 'content'))}
+                      {markdownify(_.get(section, 'content', null))}
                     </div>
-                    {_.get(section, 'actions') && 
+                    {_.get(section, 'actions', null) && (
                     <p className="block-buttons">
-                      {_.map(_.get(section, 'actions'), (action, action_idx) => (
+                      {_.map(_.get(section, 'actions', null), (action, action_idx) => (
                         <ActionLink key={action_idx} {...this.props} action={action} class_names={'button white large'} />
                       ))}
                     </p>
-                    }
+                    )}
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
-stackbitVersion: ~0.2.0
+stackbitVersion: ~0.3.0
 ssgName: gatsby
-ssgVersion: 0.1.12
-buildCommand: ./ssg-build.sh
+ssgVersion: 2.3.30
+buildCommand: gatsby build
 publishDir: public
 staticDir: static
 uploadDir: images
@@ -56,12 +56,16 @@ models:
           - green
           - orange
         default: blue
-      - type: header
+      - type: model
         name: header
         label: Header Configuration
-      - type: footer
+        models:
+          - header
+      - type: model
         name: footer
         label: Footer Configuration
+        models:
+          - footer
   header:
     type: object
     label: Header Configuration
@@ -85,7 +89,9 @@ models:
         label: Navigation Menu Links
         description: List of navigation links in header
         items:
-          type: action
+          type: model
+          models:
+            - action
   footer:
     type: object
     label: Footer Configuration
@@ -113,7 +119,9 @@ models:
         label: Navigation Menu Links
         description: List of navigation links in footer
         items:
-          type: action
+          type: model
+          models:
+            - action
       - type: boolean
         name: has_social
         label: Enable Social Links
@@ -128,7 +136,9 @@ models:
         label: Social Links
         description: The list of social links displayed in the footer
         items:
-          type: action
+          type: model
+          models:
+            - action
       - type: boolean
         name: has_subscribe
         label: Enable Subscribe
@@ -151,7 +161,22 @@ models:
         label: Links
         description: A list of links displayed in the footer
         items:
-          type: action
+          type: model
+          models:
+            - action
+  person:
+    type: data
+    label: Person
+    folder: authors
+    fields:
+      - type: string
+        name: first_name
+      - type: string
+        name: last_name
+      - type: markdown
+        name: bio
+      - type: image
+        name: photo
   landing:
     type: page
     label: Landing Page
@@ -168,7 +193,7 @@ models:
         label: Sections
         description: Page sections
         items:
-          type: reference
+          type: model
           labelField: title
           models:
             - section_content
@@ -197,7 +222,7 @@ models:
     type: page
     label: Page
     layout: page
-    exclude: posts/**
+    exclude: blog/**
     fields:
       - type: string
         name: title
@@ -216,7 +241,7 @@ models:
     type: page
     label: Post
     layout: post
-    folder: posts
+    folder: blog
     fields:
       - type: string
         name: title
@@ -231,6 +256,11 @@ models:
         name: date
         label: Date
         required: true
+      - type: reference
+        name: author
+        description: Post author
+        models:
+          - person
       - type: markdown
         name: excerpt
         label: Excerpt
@@ -284,7 +314,9 @@ models:
         name: actions
         label: Action Buttons
         items:
-          type: action
+          type: model
+          models:
+            - action
   section_cta:
     type: object
     label: Call to Action Section
@@ -299,7 +331,9 @@ models:
         name: actions
         label: Action Buttons
         items:
-          type: action
+          type: model
+          models:
+            - action
   section_faq:
     type: object
     label: FAQ Section
@@ -322,7 +356,9 @@ models:
         name: faq_items
         label: FAQ Items
         items:
-          type: faq_item
+          type: model
+          models:
+            - faq_item
   faq_item:
     type: object
     label: FAQ Item
@@ -355,7 +391,9 @@ models:
         name: features
         label: Features
         items:
-          type: feature_item
+          type: model
+          models:
+            - feature_item
   feature_item:
     type: object
     label: Feature Item
@@ -376,7 +414,9 @@ models:
         name: actions
         label: Action Buttons
         items:
-          type: action
+          type: model
+          models:
+            - action
   section_hero:
     type: object
     label: Hero Section
@@ -395,7 +435,9 @@ models:
         name: actions
         label: Action Buttons
         items:
-          type: action
+          type: model
+          models:
+            - action
   section_posts:
     type: object
     label: Posts List
@@ -436,7 +478,9 @@ models:
         name: pricing_plans
         label: Pricing Plans
         items:
-          type: pricing_plan
+          type: model
+          models:
+            - pricing_plan
   pricing_plan:
     type: object
     label: Pricing Plan
@@ -460,7 +504,9 @@ models:
         name: actions
         label: Action Buttons
         items:
-          type: action
+          type: model
+          models:
+            - action
   section_reviews:
     type: object
     label: Reviews Section
@@ -483,7 +529,9 @@ models:
         name: reviews
         label: Reviews
         items:
-          type: review_item
+          type: model
+          models:
+            - review_item
   review_item:
     type: object
     label: Review Item

@@ -6,41 +6,41 @@ import CtaButtons from './CtaButtons';
 
 export default class SectionPricing extends React.Component {
     render() {
-        let section = _.get(this.props, 'section');
+        let section = _.get(this.props, 'section', null);
         return (
-            <section id={_.get(section, 'section_id')} className={'block pricing-block bg-' + _.get(section, 'background') + ' outer'}>
+            <section id={_.get(section, 'section_id', null)} className={'block pricing-block bg-' + _.get(section, 'background', null) + ' outer'}>
               <div className="block-header inner-small">
-                {_.get(section, 'title') && 
-                <h2 className="block-title">{_.get(section, 'title')}</h2>
-                }
-                {_.get(section, 'subtitle') && 
+                {_.get(section, 'title', null) && (
+                <h2 className="block-title">{_.get(section, 'title', null)}</h2>
+                )}
+                {_.get(section, 'subtitle', null) && (
                 <p className="block-subtitle">
-                  {htmlToReact(_.get(section, 'subtitle'))}
+                  {htmlToReact(_.get(section, 'subtitle', null))}
                 </p>
-                }
+                )}
               </div>
-              {_.get(section, 'pricing_plans') && 
+              {_.get(section, 'pricing_plans', null) && (
               <div className="inner">
                 <div className="grid">
-                  {_.map(_.get(section, 'pricing_plans'), (plan, plan_idx) => (
-                  <div key={plan_idx} className={'cell plan' + (_.get(plan, 'highlight') ? ' highlight' : '')}>
+                  {_.map(_.get(section, 'pricing_plans', null), (plan, plan_idx) => (
+                  <div key={plan_idx} className={'cell plan' + (_.get(plan, 'highlight', null) ? (' highlight') : '')}>
                     <div className="plan-inside">
-                    <h3 className="plan-name">{_.get(plan, 'title')}</h3>
-                    {_.get(plan, 'price') && 
-                    <div className="plan-price">{_.get(plan, 'price')}</div>
-                    }
+                    <h3 className="plan-name">{_.get(plan, 'title', null)}</h3>
+                    {_.get(plan, 'price', null) && (
+                    <div className="plan-price">{_.get(plan, 'price', null)}</div>
+                    )}
                     <div className="plan-details">
-                      {markdownify(_.get(plan, 'details'))}
+                      {markdownify(_.get(plan, 'details', null))}
                     </div>
-                    {_.get(plan, 'actions') && 
-                      <CtaButtons {...this.props} actions={_.get(plan, 'actions')} />
-                    }
+                    {_.get(plan, 'actions', null) && (
+                      <CtaButtons {...this.props} actions={_.get(plan, 'actions', null)} />
+                    )}
                     </div>
                   </div>
                   ))}
                 </div>
               </div>
-              }
+              )}
             </section>
         );
     }

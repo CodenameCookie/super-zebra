@@ -13,68 +13,68 @@ export default class Footer extends React.Component {
                 <div className="inner">
                   <div className="footer-widgets">
                     <div className="widget footer-branding">
-                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img') ? 
+                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img', null) ? (
                       <p className="site-logo">
-                        <Link to={safePrefix('/')}><img src={safePrefix(_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img'))} alt="Logo" /></Link>
+                        <Link to={safePrefix('/')}><img src={safePrefix(_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img', null))} alt="Logo" /></Link>
                       </p>
-                       : 
+                      ) : 
                       <p className="site-title">
-                        <Link to={safePrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title')}</Link>
+                        <Link to={safePrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link>
                       </p>
                       }
-                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.tagline') && 
+                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.tagline', null) && (
                       <p className="site-description">
-                        {_.get(this.props, 'pageContext.site.siteMetadata.footer.tagline')}
+                        {_.get(this.props, 'pageContext.site.siteMetadata.footer.tagline', null)}
                       </p>
-                      }
+                      )}
                     </div>
-                    {((_.get(this.props, 'pageContext.site.siteMetadata.footer.has_nav') && _.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links')) || (_.get(this.props, 'pageContext.site.siteMetadata.footer.has_social') && _.get(this.props, 'pageContext.site.siteMetadata.footer.social_links'))) && 
+                    {((_.get(this.props, 'pageContext.site.siteMetadata.footer.has_nav', null) && _.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links', null)) || (_.get(this.props, 'pageContext.site.siteMetadata.footer.has_social', null) && _.get(this.props, 'pageContext.site.siteMetadata.footer.social_links', null))) && (
                     <nav className="widget footer-navigation">
                       <div className="footer-nav-inside">
-                        {(_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links') && _.get(this.props, 'pageContext.site.siteMetadata.footer.has_nav')) && 
+                        {(_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links', null) && _.get(this.props, 'pageContext.site.siteMetadata.footer.has_nav', null)) && (
                         <div className="secondary-nav">
-                          <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_title')}</h2>
+                          <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_title', null)}</h2>
                           <ul className="secondary-menu">
-                            {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links'), (action, action_idx) => (
+                            {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.nav_links', null), (action, action_idx) => (
                             <li key={action_idx}>
                               <ActionLink {...this.props} action={action} />
                             </li>
                             ))}
                           </ul>
                         </div>
-                        }
-                        {_.get(this.props, 'pageContext.site.siteMetadata.footer.has_social') && 
+                        )}
+                        {_.get(this.props, 'pageContext.site.siteMetadata.footer.has_social', null) && (
                         <div className="social-nav">
-                          <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.social_title')}</h2>
+                          <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.social_title', null)}</h2>
                           <ul className="social-links">
-                            {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.social_links'), (action, action_idx) => (
+                            {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.social_links', null), (action, action_idx) => (
                             <li key={action_idx}>
                               <ActionLink {...this.props} action={action} />
                             </li>
                             ))}
                           </ul>
                         </div>
-                        }
+                        )}
                       </div>
                     </nav>
-                    }
-                    {_.get(this.props, 'pageContext.site.siteMetadata.footer.has_subscribe') && 
+                    )}
+                    {_.get(this.props, 'pageContext.site.siteMetadata.footer.has_subscribe', null) && (
                     <div className="widget footer-subscribe">
-                      <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_title')}</h2>
-                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_content') && 
-                      <p>{htmlToReact(_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_content'))}</p>
-                      }
+                      <h2 className="widget-title">{_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_title', null)}</h2>
+                      {_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_content', null) && (
+                      <p>{htmlToReact(_.get(this.props, 'pageContext.site.siteMetadata.footer.subscribe_content', null))}</p>
+                      )}
                       <SubscribeForm {...this.props} />
                     </div>
-                    }
+                    )}
                   </div>
                 </div>
               </div>
               <div className="site-info outer">
                 <div className="inner">
-                  {htmlToReact(_.get(this.props, 'pageContext.site.siteMetadata.footer.content'))}
+                  {htmlToReact(_.get(this.props, 'pageContext.site.siteMetadata.footer.content', null))}
                   &nbsp;
-                  {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.links'), (action, action_idx) => (
+                  {_.map(_.get(this.props, 'pageContext.site.siteMetadata.footer.links', null), (action, action_idx) => (
                     <ActionLink key={action_idx} {...this.props} action={action} />
                   ))}
                 </div>

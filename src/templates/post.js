@@ -1,9 +1,20 @@
 import React from 'react';
 import _ from 'lodash';
-import moment from 'moment-strftime';
+import {graphql} from 'gatsby';
 
 import {Layout} from '../components/index';
 import {safePrefix, htmlToReact} from '../utils';
+import BlogPostFooter from '../components/BlogPostFooter';
+
+// this minimal GraphQL query ensures that when 'gatsby develop' is running,
+// any changes to content files are reflected in browser
+export const query = graphql`
+  query($url: String) {
+    sitePage(path: {eq: $url}) {
+      id
+    }
+  }
+`;
 
 export default class Post extends React.Component {
     render() {
@@ -13,25 +24,22 @@ export default class Post extends React.Component {
               <div className="inner-medium">
                 <article className="post post-full">
                   <header className="post-header">
-                    <h1 className="post-title">{_.get(this.props, 'pageContext.frontmatter.title')}</h1>
+                    <h1 className="post-title">{_.get(this.props, 'pageContext.frontmatter.title', null)}</h1>
                   </header>
-                  {_.get(this.props, 'pageContext.frontmatter.image') && 
+                  {_.get(this.props, 'pageContext.frontmatter.image', null) && (
                   <div className="post-thumbnail">
-                    <img src={safePrefix(_.get(this.props, 'pageContext.frontmatter.image'))} alt={_.get(this.props, 'pageContext.frontmatter.title')} />
+                    <img src={safePrefix(_.get(this.props, 'pageContext.frontmatter.image', null))} alt={_.get(this.props, 'pageContext.frontmatter.title', null)} />
                   </div>
-                  }
-                  {_.get(this.props, 'pageContext.frontmatter.subtitle') && 
+                  )}
+                  {_.get(this.props, 'pageContext.frontmatter.subtitle', null) && (
                   <div className="post-subtitle">
-                    {htmlToReact(_.get(this.props, 'pageContext.frontmatter.subtitle'))}
+                    {htmlToReact(_.get(this.props, 'pageContext.frontmatter.subtitle', null))}
                   </div>
-                  }
+                  )}
                   <div className="post-content">
-                    {htmlToReact(_.get(this.props, 'pageContext.html'))}
+                    {htmlToReact(_.get(this.props, 'pageContext.html', null))}
                   </div>
-                  <footer className="post-meta">
-                    <time className="published"
-                      dateTime={moment(_.get(this.props, 'pageContext.frontmatter.date')).strftime('%Y-%m-%d %H:%M')}>{moment(_.get(this.props, 'pageContext.frontmatter.date')).strftime('%A, %B %e, %Y')}</time>
-                  </footer>
+                  <BlogPostFooter {...this.props} page={this.props.pageContext} date_type={'long'} />
                 </article>
               </div>
             </div>
