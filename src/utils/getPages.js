@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 export default function(pages, folderPath) {
-    // TODO: resolve relative paths relative to current page
     folderPath = _.trim(folderPath, '/');
     const folderPathParts = _.split(folderPath, '/');
     return _.filter(pages, page => {
