@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {Link, safePrefix, classNames} from '../utils';
+import {Link, withPrefix, classNames} from '../utils';
 
 export default class CtaButtons extends React.Component {
     render() {
@@ -9,7 +9,7 @@ export default class CtaButtons extends React.Component {
         return (
             <p className="block-buttons">
               {_.map(actions, (action, action_idx) => (
-                <Link key={action_idx} to={safePrefix(_.get(action, 'url', null))}
+                <Link key={action_idx} to={withPrefix(_.get(action, 'url', null))}
                    {...(_.get(action, 'new_window', null) ? ({target: '_blank', rel: 'noopener'}) : null)}
                    className={classNames('button', {'secondary': _.get(action, 'primary', null) !== true})}>{_.get(action, 'label', null)}</Link>
               ))}

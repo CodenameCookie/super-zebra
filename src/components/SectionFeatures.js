@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {htmlToReact, safePrefix, markdownify} from '../utils';
+import {htmlToReact, withPrefix, markdownify} from '../utils';
 import CtaButtons from './CtaButtons';
 
 export default class SectionFeatures extends React.Component {
@@ -26,7 +26,7 @@ export default class SectionFeatures extends React.Component {
                   <div className="grid">
                     {_.get(feature, 'image', null) && (
                     <div className="cell block-preview">
-                      <img src={safePrefix(_.get(feature, 'image', null))} alt={_.get(feature, 'title', null)} />
+                      <img src={withPrefix(_.get(feature, 'image', null))} alt={_.get(feature, 'title', null)} />
                     </div>
                     )}
                     <div className="cell block-content">

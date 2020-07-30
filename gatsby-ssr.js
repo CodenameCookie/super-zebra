@@ -5,7 +5,7 @@
  */
 
 const React = require("react");
-const safePrefix = require("./src/utils/safePrefix").default;
+const withPrefix = require("./src/utils/withPrefix").default;
 
 exports.onRenderBody = function({ setHeadComponents, setPostBodyComponents }) {
 
@@ -15,9 +15,9 @@ exports.onRenderBody = function({ setHeadComponents, setPostBodyComponents }) {
 
     setPostBodyComponents([
         <React.Fragment>
-            <script src={safePrefix('js/plugins.js')}/>
-            <script src={safePrefix('js/init.js')}/>
-            <script src={safePrefix('js/main.js')}/>
+            <script src={withPrefix('js/plugins.js')}/>
+            <script src={withPrefix('js/init.js')}/>
+            <script src={withPrefix('js/main.js')}/>
             
         </React.Fragment>
     ]);

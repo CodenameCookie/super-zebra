@@ -21,14 +21,14 @@ export default class SectionFaq extends React.Component {
                 </div>
                 {_.get(section, 'faq_items', null) && (
                 <dl className="faq-accordion">
-                  {_.map(_.get(section, 'faq_items', null), (faqitem, faqitem_idx) => (<React.Fragment key={faqitem_idx}>
+                  {_.map(_.get(section, 'faq_items', null), (faqitem, faqitem_idx) => (<React.Fragment key={faqitem_idx + '.2'}>
                   <dt key={faqitem_idx} className="accordion-header">
                     <button className="accordion-trigger">
                       <div className="accordion-title">{_.get(faqitem, 'question', null)}</div>
                       <div className="accordion-icon icon-plus" />
                     </button>
                   </dt>
-                  <dd key={faqitem_idx} className="accordion-panel">
+                  <dd key={faqitem_idx + '.1'} className="accordion-panel">
                     <div className="accordion-content">
                       {markdownify(_.get(faqitem, 'answer', null))}
                     </div>

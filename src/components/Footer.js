@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {Link, safePrefix, htmlToReact} from '../utils';
+import {Link, withPrefix, htmlToReact} from '../utils';
 import ActionLink from './ActionLink';
 import SubscribeForm from './SubscribeForm';
 
@@ -15,11 +15,11 @@ export default class Footer extends React.Component {
                     <div className="widget footer-branding">
                       {_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img', null) ? (
                       <p className="site-logo">
-                        <Link to={safePrefix('/')}><img src={safePrefix(_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img', null))} alt="Logo" /></Link>
+                        <Link to={withPrefix('/')}><img src={withPrefix(_.get(this.props, 'pageContext.site.siteMetadata.footer.logo_img', null))} alt="Logo" /></Link>
                       </p>
                       ) : 
                       <p className="site-title">
-                        <Link to={safePrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link>
+                        <Link to={withPrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link>
                       </p>
                       }
                       {_.get(this.props, 'pageContext.site.siteMetadata.footer.tagline', null) && (

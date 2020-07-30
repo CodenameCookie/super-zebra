@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {safePrefix, markdownify} from '../utils';
+import {withPrefix, markdownify} from '../utils';
 import ActionLink from './ActionLink';
 
 export default class SectionHero extends React.Component {
@@ -13,7 +13,7 @@ export default class SectionHero extends React.Component {
                 <div className="grid">
                   {_.get(section, 'image', null) && (
                   <div className="cell block-preview">
-                    <img src={safePrefix(_.get(section, 'image', null))} alt={_.get(section, 'title', null)} />
+                    <img src={withPrefix(_.get(section, 'image', null))} alt={_.get(section, 'title', null)} />
                   </div>
                   )}
                   <div className="cell block-content">

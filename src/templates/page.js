@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {graphql} from 'gatsby';
 
 import {Layout} from '../components/index';
-import {safePrefix, htmlToReact} from '../utils';
+import {withPrefix, htmlToReact} from '../utils';
 
 // this minimal GraphQL query ensures that when 'gatsby develop' is running,
 // any changes to content files are reflected in browser
@@ -27,7 +27,7 @@ export default class Page extends React.Component {
                   </header>
                   {_.get(this.props, 'pageContext.frontmatter.image', null) && (
                   <div className="post-thumbnail">
-                    <img src={safePrefix(_.get(this.props, 'pageContext.frontmatter.image', null))} alt={_.get(this.props, 'pageContext.frontmatter.title', null)} />
+                    <img src={withPrefix(_.get(this.props, 'pageContext.frontmatter.image', null))} alt={_.get(this.props, 'pageContext.frontmatter.title', null)} />
                   </div>
                   )}
                   {_.get(this.props, 'pageContext.frontmatter.subtitle', null) && (

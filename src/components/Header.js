@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {Link, safePrefix, classNames} from '../utils';
+import {Link, withPrefix, classNames} from '../utils';
 
 export default class Header extends React.Component {
     render() {
@@ -12,15 +12,15 @@ export default class Header extends React.Component {
                   <div className="site-branding">
                     {_.get(this.props, 'pageContext.site.siteMetadata.header.logo_img', null) && (
                     <p className="site-logo">
-                      <Link to={safePrefix('/')}>
-                        <img src={safePrefix(_.get(this.props, 'pageContext.site.siteMetadata.header.logo_img', null))} alt="Logo" />
+                      <Link to={withPrefix('/')}>
+                        <img src={withPrefix(_.get(this.props, 'pageContext.site.siteMetadata.header.logo_img', null))} alt="Logo" />
                       </Link>
                     </p>
                     )}
                     {((_.get(this.props, 'pageContext.frontmatter.template', null) === 'landing') || (_.get(this.props, 'pageContext.frontmatter.template', null) === 'blog')) ? (
-                    <h1 className="site-title"><Link to={safePrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link></h1>
+                    <h1 className="site-title"><Link to={withPrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link></h1>
                     ) : 
-                    <p className="site-title"><Link to={safePrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link></p>
+                    <p className="site-title"><Link to={withPrefix('/')}>{_.get(this.props, 'pageContext.site.siteMetadata.header.title', null)}</Link></p>
                     }
                   </div>
                   {(_.get(this.props, 'pageContext.site.siteMetadata.header.nav_links', null) && _.get(this.props, 'pageContext.site.siteMetadata.header.has_nav', null)) && (<React.Fragment>
@@ -29,13 +29,17 @@ export default class Header extends React.Component {
                       <button id="menu-close" className="menu-toggle"><span className="screen-reader-text">Open Menu</span><span
                           className="icon-close" aria-hidden="true" /></button>
                       <ul className="menu">
-                        {_.map(_.get(this.props, 'pageContext.site.siteMetadata.header.nav_links', null), (action, action_idx) => (
-                        <li key={action_idx} className={classNames('menu-item', {'current-menu-item': _.get(this.props, 'pageContext.url', null) === _.get(action, 'url', null), 'menu-button': _.get(action, 'primary', null)})}>
-                          <Link to={safePrefix(_.get(action, 'url', null))}
-                             {...(_.get(action, 'new_window', null) ? ({target: '_blank', rel: 'noopener'}) : null)}
-                             className={classNames({'button': _.get(action, 'primary', null)})}>{_.get(action, 'label', null)}</Link>
-                        </li>
-                        ))}
+                        {_.map(_.get(this.props, 'pageContext.site.siteMetadata.header.nav_links', null), (action, action_idx) => {
+                            let pageUrl = _.trim(_.get(this.props, 'pageContext.url', null), '/');
+                            let actionUrl = _.trim(_.get(action, 'url', null), '/');
+                            return (
+                              <li key={action_idx} className={classNames('menu-item', {'current-menu-item': pageUrl === actionUrl, 'menu-button': _.get(action, 'primary', null)})}>
+                                <Link to={withPrefix(_.get(action, 'url', null))}
+                                   {...(_.get(action, 'new_window', null) ? ({target: '_blank', rel: 'noopener'}) : null)}
+                                   className={classNames({'button': _.get(action, 'primary', null)})}>{_.get(action, 'label', null)}</Link>
+                              </li>
+                            )
+                        })}
                       </ul>
                     </div>
                   </nav>

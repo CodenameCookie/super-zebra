@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {graphql} from 'gatsby';
 
 import {Layout} from '../components/index';
-import {getPages, Link, safePrefix} from '../utils';
+import {getPages, Link, withPrefix} from '../utils';
 import BlogPostFooter from '../components/BlogPostFooter';
 
 // this minimal GraphQL query ensures that when 'gatsby develop' is running,
@@ -28,13 +28,13 @@ export default class Blog extends React.Component {
                   <article key={post_idx} className="post post-card">
                     <div className="post-card-inside">
                       {_.get(post, 'frontmatter.thumb_image', null) && (
-                      <Link className="post-card-thumbnail" to={safePrefix(_.get(post, 'url', null))}>
-                        <img className="thumbnail" src={safePrefix(_.get(post, 'frontmatter.thumb_image', null))} alt={_.get(post, 'frontmatter.title', null)} />
+                      <Link className="post-card-thumbnail" to={withPrefix(_.get(post, 'url', null))}>
+                        <img className="thumbnail" src={withPrefix(_.get(post, 'frontmatter.thumb_image', null))} alt={_.get(post, 'frontmatter.title', null)} />
                       </Link>
                       )}
                       <div className="post-card-content">
                         <header className="post-header">
-                          <h2 className="post-title"><Link to={safePrefix(_.get(post, 'url', null))} rel="bookmark">{_.get(post, 'frontmatter.title', null)}</Link></h2>
+                          <h2 className="post-title"><Link to={withPrefix(_.get(post, 'url', null))} rel="bookmark">{_.get(post, 'frontmatter.title', null)}</Link></h2>
                         </header>
                         <div className="post-excerpt">
                           <p>{_.get(post, 'frontmatter.excerpt', null)}</p>

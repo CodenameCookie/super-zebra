@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {htmlToReact, getPages, Link, safePrefix, markdownify} from '../utils';
+import {htmlToReact, getPages, Link, withPrefix, markdownify} from '../utils';
 import BlogPostFooter from './BlogPostFooter';
 
 export default class SectionPosts extends React.Component {
@@ -27,13 +27,13 @@ export default class SectionPosts extends React.Component {
                   <article key={post_idx} className="post post-card">
                     <div className="post-card-inside">
                       {_.get(post, 'frontmatter.thumb_image', null) && (
-                      <Link className="post-card-thumbnail" to={safePrefix(_.get(post, 'url', null))}>
-                        <img className="thumbnail" src={safePrefix(_.get(post, 'frontmatter.thumb_image', null))} alt={_.get(post, 'frontmatter.title', null)} />
+                      <Link className="post-card-thumbnail" to={withPrefix(_.get(post, 'url', null))}>
+                        <img className="thumbnail" src={withPrefix(_.get(post, 'frontmatter.thumb_image', null))} alt={_.get(post, 'frontmatter.title', null)} />
                       </Link>
                       )}
                       <div className="post-card-content">
                         <header className="post-header">
-                          <h3 className="post-title"><Link to={safePrefix(_.get(post, 'url', null))} rel="bookmark">{_.get(post, 'frontmatter.title', null)}</Link></h3>
+                          <h3 className="post-title"><Link to={withPrefix(_.get(post, 'url', null))} rel="bookmark">{_.get(post, 'frontmatter.title', null)}</Link></h3>
                         </header>
                         <div className="post-excerpt">
                           {markdownify(_.get(post, 'frontmatter.excerpt', null))}
