@@ -4,7 +4,7 @@ sections:
   - section_id: hero
     type: section_hero
     image: images/hero.png
-    title: YOu FOund the TUbeMoths
+    title: You FOund the TUbeMoths
     content: >-
       Azimuth is the perfect theme for developers, designers and entrepreneurs
       who need a sleek, modern SaaS site. 
